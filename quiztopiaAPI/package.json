@@ -1,0 +1,24 @@
+{
+  "name": "quiztopiaapi",
+  "version": "1.0.0",
+  "description": "AWS Simple HTTP Endpoint example",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.658.1",
+    "@aws-sdk/lib-dynamodb": "^3.658.1",
+    "@middy/core": "^5.5.0",
+    "aws-sdk": "^2.1691.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.145",
+    "typescript": "^5.6.2"
+  }
+}
