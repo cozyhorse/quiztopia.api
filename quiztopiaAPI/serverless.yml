@@ -7,6 +7,30 @@ provider:
   name: aws
   runtime: nodejs20.x
   region: eu-north-1
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource:
+
+  environment:
+    # BOOKING_TABLE: ${self:custom.tables.BookingTable}
+    # ROOMS_TABLE: ${self:custom.tables.RoomsTable}
+
+custom:
+  tables:
+    # BookingTable: "BookingTable-${sls:stage}"
+    # RoomsTable: "RoomsTable-${sls:stage}"
+
+package:
+  individually: true
 
 functions:
   hello:
