@@ -1,6 +1,7 @@
 node_modules
 .serverless
 serverless.yml
+.vscode
 
 # Logs
 logs
