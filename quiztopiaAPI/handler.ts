@@ -5,7 +5,7 @@ export const hello = async (event: APIGatewayProxyEvent):Promise<APIGatewayProxy
   return {
     statusCode: 200,
     body: JSON.stringify({
-      message: returnTest()
+      message: returnTest().toUpperCase(),
     }),
   };
 };
