@@ -7,10 +7,10 @@ UsersTable:
 
 QuizTable:
   quizName: type Hash (primary key)
-  creator: "string"
+  creator: "string" GSI
   question: [
     {
-      questionId "string",
+      questionId: "string",
       question: "string",
       answer: "string",
       location: {
@@ -31,5 +31,12 @@ QuizTable:
 
 ScoreTable:
   quizname: "string",
-  quizChallanger: "string",
+  quizChallanger: "string", GSI
   score: "number"
+
+
+  {
+    quizName: Horses,
+    quizChallanger: Horseman,
+    score: 5
+  }
