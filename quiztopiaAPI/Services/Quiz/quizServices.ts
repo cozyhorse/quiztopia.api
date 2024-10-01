@@ -3,6 +3,7 @@ import {
   PutCommand,
   UpdateCommand,
   QueryCommand,
+  DeleteCommand,
 } from "@aws-sdk/lib-dynamodb";
 import { docClient } from "../../db";
 import { responseHandler } from "../ResponseHandler/responseHandler";
@@ -98,3 +99,22 @@ export const addQuestionToQuiz = async (
     return responseHandler(500, { message: error.message });
   }
 };
+
+
+export const deleteQuiz = async (quizname) => {
+  try {
+    const command = new DeleteCommand({
+      TableName: process.env.QUIZ_TABLE,
+      Key: {
+        quizName: quizname
+      }
+    })
+
+    const deleteResponse = await docClient.send(command);
+    console.log("DELETERESPONSE", deleteResponse)
+    return { success: true, message: "Quiz Deleted" };
+  } catch (error) {
+    responseHandler(500, { message: error.message})
+    
+  }
+}
