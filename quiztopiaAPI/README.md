@@ -8,7 +8,7 @@ UsersTable:
 QuizTable:
   quizName: type Hash (primary key)
   creator: "string" GSI
-  question: [
+  questions: [
     {
       questionId: "string",
       question: "string",

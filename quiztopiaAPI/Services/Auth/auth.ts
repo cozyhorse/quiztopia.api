@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import jwt, { JsonWebTokenError, TokenExpiredError } from "jsonwebtoken";
 import { responseHandler } from "../ResponseHandler/responseHandler";
 import { userObject } from "../../Types/types";
 import { APIGatewayProxyEvent } from "aws-lambda";
@@ -11,7 +11,8 @@ export const signToken = async (user: userObject) => {
     }
 
     const token = jwt.sign({ userName: user.userName }, process.env.SECRET, {
-        expiresIn: "8h", //Change to 60min when live
+        expiresIn: "1h",
+        algorithm: "HS256",
     });
 
     return token;
@@ -20,6 +21,7 @@ export const signToken = async (user: userObject) => {
 
 export const validateToken = {
     before: async (request: {event: APIGatewayProxyEvent, context: Context}) => {
+        let statusCode = 0;
     console.log("REQUEST IN VALIDATE", request);
         try {
 
@@ -27,28 +29,34 @@ export const validateToken = {
                 throw new Error("JWT secret is not defined in env");
             }
             if(!request.event.headers.authorization){
-                throw new Error("No token");
+                statusCode = 400;
+                throw new Error("No token provided");
             }
 
             const token = request.event.headers.authorization.replace("Bearer ", "");
             console.log("TOKENTOKEN", token)
-            if(!token){
-                return responseHandler(401,{message: "No token"});
-            }
 
             const data: any = jwt.verify(token, process.env.SECRET);
             console.log("DATATATA", data)
-            if(!data){
-                return responseHandler(401, {message: "no permission"});
+            if(!data || !data.userName){
+                statusCode = 401;
+                throw Error("Invalid token data")
             }
-
            
             request.context.userName = data.userName;
 
 
         } catch (error) {
+            if(error instanceof JsonWebTokenError){
+                return responseHandler(401, {message: "Invalid token!"})
+            }
+
+            if(error instanceof TokenExpiredError){
+                return responseHandler(401, {message: "Token has expired!"})
+            }
+
             console.log("error in validate", error);
-            return responseHandler(401,{message: "invalid token"});
+            return responseHandler(statusCode ,{message: error.message || "Token validation failed"});
         }
     }
 }
