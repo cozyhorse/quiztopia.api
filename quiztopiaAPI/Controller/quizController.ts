@@ -1,5 +1,5 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
-import { addQuizToTable, getAllQuizzesFromTable } from '../Services/Quiz/quizServices';
+import { addQuestionToQuiz, addQuizToTable, getAllQuizzesFromTable } from '../Services/Quiz/quizServices';
 import { responseHandler } from '../Services/ResponseHandler/responseHandler';
 import { validateToken } from '../Services/Auth/auth';
 import middy from '@middy/core';
@@ -46,18 +46,34 @@ const getAllQuizzes = async () => {
     
 }
 
-
-const addQuestionToQuiz = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+//working here
+const addQuestion = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     try {
         const body = typeof event.body === "string" ? JSON.parse(event.body) : event.body;
-        const {question, anwser, loaction} = body
-        return responseHandler(200, {message: "placeholder"})
+        const {quizname, question, answer, location} = body
+        console.log("VALUES", quizname, question, answer, location)
+
+        const placeholder = {
+            question: question,
+            answer: answer,
+            location: location
+        }
+
+        const quiz = await addQuestionToQuiz(quizname, placeholder)
+        if(!quiz){
+            return responseHandler(500, {message: "Couldn't add question to quiz"})
+        }
+
+        return responseHandler(200, {message: "All goodie!"}
+
+        )
     } catch (error) {
-        return responseHandler(500, {message: "placeholder"})
+        return responseHandler(500, {message: error.message})
     }
 
 }
 
 
 export const addQuizAuth = middy(addQuiz).use(validateToken)
+export const addQuestionAuth = middy(addQuestion).use(validateToken)
 export const allQuizAuth = middy(getAllQuizzes).use(validateToken)
