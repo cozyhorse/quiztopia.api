@@ -1,13 +1,13 @@
 ---Tables
 
     UsersTable: 
-      userName: "string" type Hash (primary key)
-      password: "string" //bcrypt
+      userName: "string"
+      password: "string"
 
 
     QuizTable:
-      quizName: type Hash (primary key)
-      creator: "string" GSI
+      quizName: "string"
+      creator: "string" 
       questions: [
         {
           questionId: "string",
@@ -31,7 +31,7 @@
 
     ScoreTable:
       quizname: "string",
-      quizChallanger: "string", GSI
+      quizChallanger: "string",
       score: "number"
 
 
