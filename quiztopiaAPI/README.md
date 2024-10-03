@@ -29,17 +29,17 @@ QuizTable:
     },   
   ]
 
-ScoreTable:
-  quizname: "string",
-  quizChallanger: "string", GSI
-  score: "number"
+    ScoreTable:
+      quizname: "string",
+      quizChallanger: "string", GSI
+      score: "number"
 
 
-  {
-    quizName: Horses,
-    quizChallanger: Horseman, -- from token
-    score: 5
-  }
+      {
+        quizName: Horses,
+        quizChallanger: Horseman, -- from token
+        score: 5
+      }
 
 
     UserTable:
