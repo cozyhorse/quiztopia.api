@@ -3,12 +3,19 @@ import { addQuestionToQuiz, addQuizToTable, deleteQuiz, getAllQuizzesFromTable, 
 import { responseHandler } from '../Services/ResponseHandler/responseHandler';
 import { validateToken } from '../Services/Auth/auth';
 import middy from '@middy/core';
+import { ajv } from '../db';
+import { questionSchema, quizSchema } from '../Schema/quizSchema';
 
 const addQuiz = async (event: APIGatewayProxyEvent, context: any): Promise<APIGatewayProxyResult> => {
-try {
+    try {
         const body = typeof event.body === "string" ? JSON.parse(event.body) : event.body;
         const {quizname} = body;
         const userName = context.userName;
+        const validate = ajv.compile(quizSchema);
+        const isValid = validate(body);
+        if(!isValid) {
+            return responseHandler(400, {error: validate.errors});
+        }
         
 
         console.log("USERNAME", userName)
@@ -77,6 +84,11 @@ const addQuestion = async (event: APIGatewayProxyEvent, context: any): Promise<A
         const body = typeof event.body === "string" ? JSON.parse(event.body) : event.body;
         const {quizname, question, answer, location} = body
         const userName = context.userName
+        const validate = ajv.compile(questionSchema);
+        const isValid = validate(body);
+        if(!isValid) {
+            return responseHandler(400, {error: validate.errors});
+        }
 
         const checkQuizOwner = await getQuiz(quizname)
 

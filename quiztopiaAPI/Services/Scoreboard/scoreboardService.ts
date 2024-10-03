@@ -3,8 +3,8 @@ import { docClient } from "../../db";
 import { responseHandler } from "../ResponseHandler/responseHandler";
 
 export const addScoreToTable = async (
-  quizname: String,
-  username: String,
+  quizname: string,
+  username: string,
   score: Number
 ) => {
   try {
@@ -29,7 +29,7 @@ export const addScoreToTable = async (
   }
 };
 
-export const getAllAttemptsForQuiz = async (quizname: String) => {
+export const getAllAttemptsForQuiz = async (quizname: string) => {
     try {
       const command = new QueryCommand({
         TableName: process.env.SCORE_TABLE,

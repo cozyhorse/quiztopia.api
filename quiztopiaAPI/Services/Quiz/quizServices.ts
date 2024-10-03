@@ -9,7 +9,7 @@ import { docClient } from "../../db";
 import { responseHandler } from "../ResponseHandler/responseHandler";
 import { questionType } from "../../Types/types";
 
-export const addQuizToTable = async (quizname: String, creator: String) => {
+export const addQuizToTable = async (quizname: string, creator: string) => {
   try {
     const command = new PutCommand({
       TableName: process.env.QUIZ_TABLE,
@@ -53,7 +53,7 @@ export const getAllQuizzesFromTable = async () => {
   }
 };
 
-export const getQuiz = async (quizname: String) => {
+export const getQuiz = async (quizname: string) => {
   try {
     const command = new GetCommand({
       TableName: process.env.QUIZ_TABLE,
@@ -73,7 +73,7 @@ export const getQuiz = async (quizname: String) => {
 };
 
 export const addQuestionToQuiz = async (
-  quizname: String,
+  quizname: string,
   question: questionType
 ) => {
   try {

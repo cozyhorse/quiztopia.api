@@ -1,13 +1,21 @@
-import { APIGatewayEvent, APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { responseHandler } from "../Services/ResponseHandler/responseHandler";
 import { createUser, loginUser } from "../Services/User/userServices";
-import { log } from "console";
+import { ajv } from "../db";
+import { userSchema } from "../Schema/userSchema";
 
+const validate = ajv.compile(userSchema)
 
 
 export const addUser = async (event: APIGatewayProxyEvent, context): Promise<APIGatewayProxyResult> => {
     try {
-        const body = typeof event.body === "string" ? JSON.parse(event.body) : event.body;
+       
+       const body = typeof event.body === "string" ? JSON.parse(event.body) : event.body;
+       const isValid = validate(body)
+      if(!isValid) {
+         return responseHandler(400, {message: "Invalid data in request", error: validate.errors})
+      }
+
         const {username, password} = body;
          if(!username){
             return responseHandler(400, {message: "No username entered"})
@@ -38,6 +46,10 @@ export const addUser = async (event: APIGatewayProxyEvent, context): Promise<API
 export const login = async (event: APIGatewayProxyEvent, context): Promise<APIGatewayProxyResult> => {
    try {
       const body = typeof event.body === "string" ? JSON.parse(event.body) : event.body;
+      const isValid = validate(body)
+      if(!isValid) {
+         return responseHandler(400, {message: "Invalid data in request", error: validate.errors})
+      }
       const { username, password } = body
 
       const isLoggedIn = await loginUser(username,password)
