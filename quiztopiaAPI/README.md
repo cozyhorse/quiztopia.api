@@ -41,8 +41,7 @@ ScoreTable:
     score: 5
   }
 
-  resources:
-  Resources:
+
     UserTable:
       Type: AWS::DynamoDB::Table
       Properties:
