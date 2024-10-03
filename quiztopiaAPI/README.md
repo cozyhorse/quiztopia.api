@@ -1,33 +1,33 @@
 ---Tables
 
-  UsersTable: 
-    userName: "string" type Hash (primary key)
-    password: "string" //bcrypt
+    UsersTable: 
+      userName: "string" type Hash (primary key)
+      password: "string" //bcrypt
 
 
-  QuizTable:
-    quizName: type Hash (primary key)
-    creator: "string" GSI
-    questions: [
-      {
-        questionId: "string",
-        question: "string",
-        answer: "string",
-        location: {
-          longitude: number,
-          latitude: number
-        }
-      },
-      {
-        questionId: "string",
-        question: "string",
-        answer: "string",
-        location: {
-          longitude: number,
-          latitude: number
-        }
-      },   
-    ]
+    QuizTable:
+      quizName: type Hash (primary key)
+      creator: "string" GSI
+      questions: [
+        {
+          questionId: "string",
+          question: "string",
+          answer: "string",
+          location: {
+            longitude: number,
+            latitude: number
+          }
+        },
+        {
+          questionId: "string",
+          question: "string",
+          answer: "string",
+          location: {
+            longitude: number,
+            latitude: number
+          }
+        },   
+      ]
 
     ScoreTable:
       quizname: "string",
