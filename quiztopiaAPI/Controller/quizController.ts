@@ -28,7 +28,7 @@ const addQuiz = async (event: APIGatewayProxyEvent, context: any): Promise<APIGa
             }
         }else{
             console.log("Response is an API Gateway results", quiz)
-            return responseHandler(500, {message: "Faild to create quiz"})
+            return responseHandler(500, {message: "Failed to create quiz/Quizname might already exist"})
         }
 
 

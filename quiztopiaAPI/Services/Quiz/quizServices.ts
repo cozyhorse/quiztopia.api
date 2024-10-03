@@ -19,6 +19,7 @@ export const addQuizToTable = async (quizname: string, creator: string) => {
         questions: [],
         quizStatus: "active",
       },
+      ConditionExpression: "attribute_not_exists(quizName)",
     });
 
     const quizAddResponse = await docClient.send(command);
