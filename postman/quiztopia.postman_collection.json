@@ -1,0 +1,317 @@
+{
+	"info": {
+		"_postman_id": "c8ec1901-6c34-418e-9e83-21aa1e7161f7",
+		"name": "quiztopia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32463667"
+	},
+	"item": [
+		{
+			"name": "Signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"giraffeman\",\r\n    \"password\": \"12345\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://7uvl0uzb6a.execute-api.eu-north-1.amazonaws.com/user/signup",
+					"protocol": "https",
+					"host": [
+						"7uvl0uzb6a",
+						"execute-api",
+						"eu-north-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"user",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"catman\",\r\n    \"password\": \"12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://7uvl0uzb6a.execute-api.eu-north-1.amazonaws.com/user/login",
+					"protocol": "https",
+					"host": [
+						"7uvl0uzb6a",
+						"execute-api",
+						"eu-north-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Addquiz",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImNhdG1hbiIsImlhdCI6MTcyNzk1MjA4MywiZXhwIjoxNzI3OTU1NjgzfQ.b1B9Dd-BXDfu03eDPpUlMmyywntPt7IsDn-yXVlwlh4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"quizname\": \"countries\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://7uvl0uzb6a.execute-api.eu-north-1.amazonaws.com/quiz/addquiz",
+					"protocol": "https",
+					"host": [
+						"7uvl0uzb6a",
+						"execute-api",
+						"eu-north-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"quiz",
+						"addquiz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Quizzes",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://7uvl0uzb6a.execute-api.eu-north-1.amazonaws.com/quiz/allquiz",
+					"protocol": "https",
+					"host": [
+						"7uvl0uzb6a",
+						"execute-api",
+						"eu-north-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"quiz",
+						"allquiz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add question to quiz",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImNhdG1hbiIsImlhdCI6MTcyNzk1MjA4MywiZXhwIjoxNzI3OTU1NjgzfQ.b1B9Dd-BXDfu03eDPpUlMmyywntPt7IsDn-yXVlwlh4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"quizname\": \"countriesv2\",\r\n    \"question\": \"pad thai?\",\r\n    \"answer\": \"Thailand\",\r\n    \"location\": {\r\n        \"latitude\": 123.124,\r\n        \"longitude\": 213.1241\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://7uvl0uzb6a.execute-api.eu-north-1.amazonaws.com/quiz/addquestion",
+					"protocol": "https",
+					"host": [
+						"7uvl0uzb6a",
+						"execute-api",
+						"eu-north-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"quiz",
+						"addquestion"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get specific quiz",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://7uvl0uzb6a.execute-api.eu-north-1.amazonaws.com/quiz/getquiz/countriesv2",
+					"protocol": "https",
+					"host": [
+						"7uvl0uzb6a",
+						"execute-api",
+						"eu-north-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"quiz",
+						"getquiz",
+						"countriesv2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete quiz",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImNhdG1hbiIsImlhdCI6MTcyNzk1MjA4MywiZXhwIjoxNzI3OTU1NjgzfQ.b1B9Dd-BXDfu03eDPpUlMmyywntPt7IsDn-yXVlwlh4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://7uvl0uzb6a.execute-api.eu-north-1.amazonaws.com/quiz/delete/countries",
+					"protocol": "https",
+					"host": [
+						"7uvl0uzb6a",
+						"execute-api",
+						"eu-north-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"quiz",
+						"delete",
+						"countries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Scores",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://7uvl0uzb6a.execute-api.eu-north-1.amazonaws.com/scoreboard/{quiz}",
+					"protocol": "https",
+					"host": [
+						"7uvl0uzb6a",
+						"execute-api",
+						"eu-north-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"scoreboard",
+						"{quiz}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Score",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImNhdG1hbiIsImlhdCI6MTcyNzk1MjA4MywiZXhwIjoxNzI3OTU1NjgzfQ.b1B9Dd-BXDfu03eDPpUlMmyywntPt7IsDn-yXVlwlh4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"quizname\": \"countriesv2\",\r\n    \"score\": 50\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://7uvl0uzb6a.execute-api.eu-north-1.amazonaws.com/scoreboard/add",
+					"protocol": "https",
+					"host": [
+						"7uvl0uzb6a",
+						"execute-api",
+						"eu-north-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"scoreboard",
+						"add"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
